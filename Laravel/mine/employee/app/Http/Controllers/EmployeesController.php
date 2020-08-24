@@ -7,7 +7,10 @@ use Illuminate\Http\Request;
 
 class EmployeesController extends Controller
 {
-
+    public function __construct()
+    {
+        // $this->middleware('JWTMiddleware', ['except' => ['login']]);
+    }
 
 
 
@@ -63,13 +66,7 @@ class EmployeesController extends Controller
     public function update(Request $request, Employee $employee)
     {
         $object = $employee->update($request->all());
-        // $object = Employee::find($employee);
 
-        // $object->fname = $request->fname;
-        // $object->lname = $request->lname;
-        // $object->email = $request->email;
-        // $object->status = $request->status;
-        // $object->save();
         return response()->json($object, 201);
     }
 

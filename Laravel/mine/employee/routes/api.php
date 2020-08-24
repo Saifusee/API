@@ -12,15 +12,21 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::group([
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+    'prefix' => 'auth'
+    
+    ], function ($router) {
+    
+    Route::post('login', 'AuthController@login');
+    Route::post('logout', 'AuthController@logout');
+    Route::post('refresh', 'AuthController@refresh');
+    Route::post('me', 'AuthController@me');
+    Route::post('payload', 'AuthController@payload');
 
-Route::get('employees/paid', 'EmployeesController@paid');
-Route::get('employees/unpaid', 'EmployeesController@unpaid');
-Route::post('employees/checked/{id}/{value}', 'EmployeesController@checkToggle');
-Route::get('employees/{employee}/edit', 'EmployeesController@edit');
-Route::apiResource('employees', 'EmployeesController');
-
-
+    });
+    Route::get('employees/paid', 'EmployeesController@paid');
+    Route::get('employees/unpaid', 'EmployeesController@unpaid');
+    Route::post('employees/checked/{id}/{value}', 'EmployeesController@checkToggle');
+    Route::get('employees/{employee}/edit', 'EmployeesController@edit');
+    Route::apiResource('employees', 'EmployeesController');

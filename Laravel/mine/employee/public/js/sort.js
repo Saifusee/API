@@ -1,7 +1,7 @@
 $.noConflict();
 jQuery(document).ready(function($){
 
-  //Constant for Homepage URL
+  //Constant for Homepage URL (any change before employees just do it here it apply everywhere)
 const HOME_PAGE_URL = "http://localhost:8000/api/employees";
 
 
@@ -123,14 +123,14 @@ function executeDelete(urlToReach){
   //Paid button in work
   $(".paidcont").click(function(){
 
-    executeGet("http://localhost:8000/api/employees/paid");
+    executeGet(HOME_PAGE_URL + "/paid");
 
   });
 
   //Unpaid button in work
   $(".unpaidcont").click(function(){
 
-    executeGet("http://localhost:8000/api/employees/unpaid");
+    executeGet(HOME_PAGE_URL + "/unpaid");
 
   });
 
@@ -151,7 +151,7 @@ function executeDelete(urlToReach){
     let value = $(this).closest("input").attr("value");
     console.log(value);
 
-    executePost("http://localhost:8000/api/employees/checked/" + rowId + "/" + value);
+    executePost(HOME_PAGE_URL + "/checked/" + rowId + "/" + value);
 
     executeGet(HOME_PAGE_URL);
 
@@ -196,7 +196,7 @@ $(document).on('click',".time_btn", function(event){
 
  let id = $(this).closest("tr").attr("id");
 
- executeDelete("http://localhost:8000/api/employees/" + id);
+ executeDelete(HOME_PAGE_URL + "/" + id);
 
  executeGet(HOME_PAGE_URL);
 

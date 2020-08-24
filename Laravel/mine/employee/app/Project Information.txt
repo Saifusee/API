@@ -1,0 +1,9 @@
+this project is same as we made from jquery 
+but now we use api and ajax to send data to show it on frontend and all the functionality working on backened in laravel
+
+
+also we use JWT to tokens you can check them but i don't have time to add registration in this project so i just create routes from it
+
+you can see screenshot of API_tutorials->Laravel->JWT token folder
+
+and use postman to see how it works

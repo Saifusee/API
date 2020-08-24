@@ -60,17 +60,17 @@ class EmployeesController extends Controller
      * @param  \App\Employee  $employee
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $employee)
+    public function update(Request $request, Employee $employee)
     {
-        dd($request);
-        $object = Employee::find($employee);
+        $object = $employee->update($request->all());
+        // $object = Employee::find($employee);
 
-        $object->fname = $request->get("fname");
-        $object->lname = $request->get("lname");
-        $object->email = $request->get("email");
-        $object->status = $request->get("status");
-        $object->save();
-        return response()->json($a, 201);
+        // $object->fname = $request->fname;
+        // $object->lname = $request->lname;
+        // $object->email = $request->email;
+        // $object->status = $request->status;
+        // $object->save();
+        return response()->json($object, 201);
     }
 
 

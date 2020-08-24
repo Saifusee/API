@@ -83,13 +83,14 @@
                     <input type="text" id="emailupt" name="email"><br><br>
                     </div>
                     <div class="salary">
-                        Salary Paid <input type="checkbox" id="statusupt" name="status" value=1>
+                        Salary Paid <input type="checkbox" id="statusupt" name="status" value="1">
                     </div>
                     <div class="update">
                         <input type="button" id="update" class="update_btn" value="Update">
                     </div>
                     
-                  </form> 
+                  </form>
+                  <input type="hidden" id="editid">
         
 
             </div>
@@ -112,20 +113,7 @@
                     </tr>
                 </thead>
                 <tbody class="tbody">
-                    <!--<tr>
-                        <td>%sno%</td>
-                        <td>%fname%</td>
-                        <td>%lname%</td>
-                        <td>%email%</td>
-                        <td><label class="switch">
-                            <input type="checkbox" %checked% value=%val%>
-                            <span class="slider round"></span>
-                          </label></td>
-                          <td><button><i class="fa fa-times" aria-hidden="true"></i></button>
-                          </td>
-                    </tr>-->
 
-                    
                 </tbody>
             </table>
 

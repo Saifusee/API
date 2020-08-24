@@ -3,6 +3,8 @@ jQuery(document).ready(function($){
 
   //Constant for Homepage URL
 const HOME_PAGE_URL = "http://localhost:8000/api/employees";
+
+
 //UI 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -31,14 +33,14 @@ $(".close").click(function(){
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-function executeGet(urlToReach, method){
+function executeGet(urlToReach){
 
   //via jquery ajax get we getting data from the url http://localhost:8000/api/employees via post method
     jQuery.ajax({
       url: urlToReach,
       processData: false,
       contentType: false,
-      type: method,
+      type: "GET",
       dataType: "json",
 
           //in Controller of backend we send that we get successfull 200 so we show if success and it takes first parameter as a result we get from response json of backened
@@ -87,23 +89,6 @@ function executePost(urlToReach, dataToPost){
 
 
 
-function executePut(urlToReach, dataToPost){
-
-  //via jquery ajax get we getting data from the url http://localhost:8000/api/employees via post method
-    jQuery.ajax({
-      url: urlToReach,
-      data: dataToPost, 
-      processData: false,
-      contentType: false,
-      type: "PUT",
-      dataType: "json",
-  });
-}
-
-
-
-
-
 
 function executeDelete(urlToReach){
 
@@ -138,21 +123,21 @@ function executeDelete(urlToReach){
   //Paid button in work
   $(".paidcont").click(function(){
 
-    executeGet("http://localhost:8000/api/employees/paid", "GET");
+    executeGet("http://localhost:8000/api/employees/paid");
 
   });
 
   //Unpaid button in work
   $(".unpaidcont").click(function(){
 
-    executeGet("http://localhost:8000/api/employees/unpaid", "GET");
+    executeGet("http://localhost:8000/api/employees/unpaid");
 
   });
 
 
   //All button work
   $(".allcont").click(function(){
-    executeGet(HOME_PAGE_URL, "GET");
+    executeGet(HOME_PAGE_URL);
   });
 
 
@@ -168,16 +153,9 @@ function executeDelete(urlToReach){
 
     executePost("http://localhost:8000/api/employees/checked/" + rowId + "/" + value);
 
-    executeGet(HOME_PAGE_URL, "GET");
+    executeGet(HOME_PAGE_URL);
 
   });
-
-
-
-
-
-
-
 
 
 
@@ -201,7 +179,7 @@ $(".submit_btn").click(function(){
 
 if (fname !== "" && lname !== "" && email !== ""){
 
-  executeGet(HOME_PAGE_URL, "GET");
+  executeGet(HOME_PAGE_URL);
 
     $("#email,#fname,#lname").val("");
     $("#status").prop("checked", false);
@@ -220,7 +198,7 @@ $(document).on('click',".time_btn", function(event){
 
  executeDelete("http://localhost:8000/api/employees/" + id);
 
- executeGet(HOME_PAGE_URL, "GET");
+ executeGet(HOME_PAGE_URL);
 
 })
 
@@ -273,16 +251,22 @@ $(document).on('click', "#update", function(){
 
   var $form = $('#form14');
   var formData = new FormData($($form)[0]);
-  console.log(formData.get("fname"));
-  console.log(formData.get("lname"));
-  console.log(formData.get("email"));
-  console.log(formData.get("status"));
+//to ensure checkbox data
+ let stat =  $("#statusupt").is(":checked");
+  if(stat){
+    formData.append("status", 1);
+  } else {
+    formData.append("status", 0);
+  };
+
+//bcz formData cannot send on PUT/Patch request, we put key and value in header of request to let server know its look like post but its a put request
+  formData.append("_method", "PUT");
 
   let id = $("#editid").val();
 
-  executePut(HOME_PAGE_URL + "/" + 1, formData);
+  executePost(HOME_PAGE_URL + "/" + id,formData);
 
-  executeGet(HOME_PAGE_URL, "GET");
+  executeGet(HOME_PAGE_URL);
 
   $("#form3").css("display", "none");
    
@@ -293,7 +277,7 @@ $(document).on('click', "#update", function(){
 
 
 function init (){
-  executeGet(HOME_PAGE_URL, "GET");
+  executeGet(HOME_PAGE_URL);
 }
 init();
 

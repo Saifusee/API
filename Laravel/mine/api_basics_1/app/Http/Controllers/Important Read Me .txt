@@ -1,0 +1,1 @@
+This project  not work mostly show unauthorized and stuff bcz some authenticate mioddleware are activated so go to kernel.php and in api section comment out all Middleware included
